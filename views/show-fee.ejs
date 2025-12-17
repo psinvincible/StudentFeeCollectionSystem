@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>SFCS - Show-fee</title>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <div class="shrink-0">
+      <%- include("./partials/navbar") %>
+      </div>
+          <table class="table-auto m-4 border border-cyan-200 ">
+            <thead class="bg-amber-300 shadow-md shadow-cyan-200">
+          <tr >
+            <th scope="col">S.no</th>
+            <th scope="col">Name</th>
+            <th scope="col">Class</th>
+            <th scope="col">School</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date of Payment</th>
+            <th scope="col">Payment Mode</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <% if(feeCollection) { %> <% feeCollection.forEach((fee, index) => { %>
+        <tbody class="border border-black hover:bg-gray-200">
+          <tr class="text-center">
+            <th class="border border-black " scope="row"><%= (index + 1) %></th>
+            <td class="border border-black"><%= fee.fullName %></td>
+            <td class="border border-black"><%= fee.class %></td>
+            <td class="border border-black"><%= fee.school %></td>
+            <td class="border border-black"><%= fee.amount %></td>
+            <td class="border border-black"><%= fee.dateOfPayment.toDateString() %></td>
+            <td class="border border-black"><%= fee.paymentMode %></td>
+            <td class="border border-black"><button class="m-1 px-3 py-1.25 rounded-md bg-cyan-500 hover:bg-cyan-400"><a href="/fee/edit-fee/<%= fee._id %>">Edit</a></button><button class=" m-1 px-1 py-1 rounded-md bg-red-500 hover:bg-red-400"><a href="/fee/delete/<%= fee._id %>">Delete</a></button></td>
+          </tr>
+        </tbody>
+        <% }) %> <% } else { %>
+        <tr>
+          <th scope="col">No fee to show</th>
+        </tr>
+      </table>
+        <% } %>
+        <div class="shrink-0">
+      <%- include("./partials/scripts") %>
+      </div>
+    </div>
+  </body>
+</html>

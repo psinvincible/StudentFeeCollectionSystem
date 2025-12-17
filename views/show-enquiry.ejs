@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>SFCS - Show-fee</title>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <div class="shrink-0">
+      <%- include("./partials/navbar") %>
+      </div>
+          <table class="table-auto m-4 border border-cyan-200 ">
+            <thead class="bg-amber-300 shadow-md shadow-cyan-200">
+          <tr >
+            <th scope="col">S.no</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact Info</th>
+            <th scope="col">Enquiry Details</th>
+            <th scope="col">Responded By</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <% if(enquiries) { %> <% enquiries.forEach((enquiry, index) => { %>
+        <tbody class="border border-black hover:bg-gray-200">
+          <tr class="text-center">
+            <th class="border border-black " scope="row"><%= (index + 1) %></th>
+            <td class="border border-black"><%= enquiry.name %></td>
+            <td class="border border-black"><%= enquiry.contactInfo %></td>
+            <td class="border border-black"><%= enquiry.details %></td>
+            <td class="border border-black"><% if (enquiry.teacherId) { %>
+             <%= enquiry.teacherId.fullName %>
+            <% }else { %>
+                <%= enquiry.responded %>
+                <% } %>
+                </td>
+            <td class="border border-black">
+                <% if (enquiry.responded === "Yes") { %>
+                 <button class=" m-1 px-1 py-1 rounded-md bg-green-400">Responded</button>
+                <% }else { %>
+                <button class=" m-1 px-1 py-1 rounded-md bg-red-500 hover:bg-red-400"><a href="/enquiry/respond/<%= enquiry._id %>">Respond</a></button></td>
+                <% } %>
+          </tr>
+        </tbody>
+        <% }) %> <% } else { %>
+        <tr>
+          <th scope="col">No fee to show</th>
+        </tr>
+      </table>
+        <% } %>
+        <div class="shrink-0">
+      <%- include("./partials/scripts") %>
+      </div>
+    </div>
+  </body>
+</html>

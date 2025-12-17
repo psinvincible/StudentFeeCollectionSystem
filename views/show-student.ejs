@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>SFCS - Show-Student</title>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <div class="shrink-0">
+      <%- include("./partials/navbar") %>
+      </div>
+      <table class="table-auto m-4 border border-cyan-200 ">
+        <thead class="bg-amber-300 shadow-md shadow-cyan-200">
+          <tr>
+            <th scope="col">S.no</th>
+            <th scope="col">Profile Photo</th>
+            <th scope="col">Name</th>
+            <th scope="col">Class</th>
+            <th scope="col">School</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact No.</th>
+            <th scope="col">DOJ</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <% if(students) { %> <% students.forEach((student, index) => { %>
+        <tbody class="border border-black hover:bg-gray-200">
+          <tr class="text-center ">
+            <th scope="row"><%= (index + 1) %></th>
+            <td class="border border-black p-2"><a href="<%= student.profileImgURL %>" target="_blank"><img src="<%= student.profileImgURL %>" style="width: 40px; height: 40px;" class="rounded-full" alt="profileImg"></a></td>
+            <td class="border border-black"><%= student.fullName %></td>
+            <td class="border border-black"><%= student.class %></td>
+            <td class="border border-black"><%= student.school %></td>
+            <td class="border border-black"><%= student.address %></td>
+            <td class="border border-black">+91 <%= student.contactNo %></td>
+            <td class="border border-black"><%= student.dateOfJoin.toDateString() %></td>
+            <td class="border border-black"><button class="m-1 px-3 py-1.25 rounded-md bg-cyan-500 hover:bg-cyan-400"><a href="/student/edit-student/<%= student._id %>">Edit</a></button><button class=" m-1 px-1 py-1 rounded-md bg-red-500 hover:bg-red-400"><a style="text-decoration: none;" href="/student/delete/<%= student._id %>">Delete</a></button></td>
+          </tr>
+        </tbody>
+        <% }) %> <% } else { %>
+        <tr>
+          <th scope="col">No fee to show</th>
+        </tr>
+        <% } %>
+      </table>
+      <%- include("./partials/scripts") %>
+    </div>
+  </body>
+</html>

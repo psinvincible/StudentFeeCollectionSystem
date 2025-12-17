@@ -1,0 +1,259 @@
+<nav class="p-1 shadow-md sticky top-0 z-50 bg-white/30 backdrop-blur-md">
+  <div class="flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2">
+      <img
+        src="/images/sf_newlogo.jpg"
+        alt="logo"
+        class="h-8 w-8 rounded-full"
+      />
+      <span class="text-lg font-semibold text-gray-900">SFCS</span>
+    </a>
+
+    <% if (!user) { %>
+     <ul
+      class="hidden md:flex border items-center border-gray-400 rounded-2xl p-2"
+    >
+      <li class="hover:bg-gray-200 rounded-md p-1">
+        <a class="p-2" href="/">Home</a>
+      </li>
+      <li class="hover:bg-gray-200 rounded-md p-1">
+        <a class="p-2" href="/contactus">Contact Us</a>
+      </li>
+      <li class="hover:bg-gray-200 rounded-md p-1">
+        <a class="p-2" href="/about">About</a>
+      </li>
+      <li class="hover:bg-gray-200 rounded-md p-1">
+        <a class="p-2" href="/enquiry">Enquiry</a>
+      </li>
+    </ul>
+    <% } %>
+    
+
+    <div class="hidden md:flex">
+      <% if (!user) { %>
+      <button class="bg-cyan-300 rounded-md m-2 p-2 items-center">
+        <a href="/user/login">Login</a>
+      </button>
+      <button class="bg-amber-300 rounded-md m-2 p-2">
+        <a href="/user/signup">SignUp</a>
+      </button>
+      <% }else { %>
+
+      <div
+        class="services flex border border-gray-400 rounded-2xl p-2 mx-3 items-center"
+      >
+        <div class="m-1 hover:bg-gray-200 rounded-md p-1">
+          <button class="">
+            <% if (user.role === "ADMIN") { %>
+            <a href="/admin/">Dashboard</a>
+            <% }else { %> <% } %>
+          </button>
+        </div>
+        <div class="m-1 hover:bg-gray-200 rounded-md p-1">
+          <button class="">
+            <a href="/enquiry/show-enquiry">Enquiries</a>
+          </button>
+        </div>
+        <div class="relative inline-block group mx-2">
+          <button
+            class="inline-flex items-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none"
+            type="button"
+          >
+            Student
+            <svg
+              class="ml-2 h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <ul
+            class="absolute left-0 z-10 hidden w-40 rounded-md bg-white shadow-lg group-hover:block"
+          >
+            <li>
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                href="/student"
+                >Enroll-Student</a
+              >
+            </li>
+            <li>
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                href="/student/show-student"
+                >Show-Student</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="relative inline-block group">
+          <button
+            class="inline-flex items-center rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none"
+            type="button"
+          >
+            Fee
+            <svg
+              class="ml-2 h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <ul
+            class="absolute left-0 z-10 hidden w-40 rounded-md bg-white shadow-lg group-hover:block"
+          >
+            <li>
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                href="/fee/add-fee"
+                >Add-Fee</a
+              >
+            </li>
+            <li>
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                href="/fee/show-fee"
+                >Show-Fee-Received</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div
+        class="mx-2 flex items-center gap-2 rounded-md border border-gray-200 bg-white px-2 py-1"
+      >
+        <span
+          class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-500 text-xs font-semibold text-white"
+        >
+          <%= user.email.charAt(0).toUpperCase() %>
+        </span>
+        <div class="leading-tight">
+          <p class="text-xs font-medium text-gray-800"><%= user.email %></p>
+          <p class="text-[10px] text-gray-500"><%= user.role %></p>
+        </div>
+      </div>
+      <button class="bg-rose-300 rounded-md p-2">
+        <a href="/user/logout">Logout</a>
+      </button>
+      <% } %>
+    </div>
+    <button
+      onclick="openMenu()"
+      class="md:hidden p-2 rounded-md hover:bg-gray-200"
+    >
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile screen  view -->
+<div
+  id="mobileMenu"
+  class="fixed top-0 right-0 z-50 h-full w-[70%] shadow-lg translate-x-full transition-transform duration-300 ease-in-out md:hidden bg-white/30 backdrop-blur-md"
+> 
+
+<div class="flex items-center justify-between p-4 border-b">
+
+  <% if (user) { %>
+    <div
+    class="flex items-center gap-2 rounded-md border border-gray-200 bg-white px-2 py-1"
+  >
+    <span
+      class="flex h-7 w-7 items-center justify-center rounded-full bg-blue-500 text-xs font-semibold text-white"
+    >
+      <%= user.email.charAt(0).toUpperCase() %>
+    </span>
+    <div class="leading-tight">
+      <p class="text-xs font-medium text-gray-800"><%= user.email %></p>
+      <p class="text-[10px] text-gray-500"><%= user.role %></p>
+    </div>
+  </div>   
+  <% } %>
+
+  <button onclick="closeMenu()" class="p-2 rounded-md hover:bg-gray-200">
+    <svg
+      class="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+
+</div>
+
+  <div class="flex flex-col gap-2 p-4">
+    <% if (!user) { %>
+    <a onclick="closeMenu()" href="/" class="mobile-link">Home</a>
+    <a onclick="closeMenu()" href="/contactus" class="mobile-link"
+      >Contact Us</a
+    >
+    <a onclick="closeMenu()" href="/about" class="mobile-link">About</a>
+    <a onclick="closeMenu()" href="/enquiry" class="mobile-link">Enquiry</a>
+    <% } %> <% if (!user) { %>
+    <a onclick="closeMenu()" href="/user/login" class="mobile-link">Login</a>
+    <a onclick="closeMenu()" href="/user/signup" class="mobile-link">Sign Up</a>
+    <% } else { %> <% if (user.role === "ADMIN") { %>
+    <a onclick="closeMenu()" href="/admin/" class="mobile-link">Dashboard</a>
+    <% }else if(user.role === "TEACHER") { %>
+    <a onclick="closeMenu()" href="/user/dashboard" class="mobile-link"
+      >Dashboard</a
+    >
+    <% } %>
+
+    <a onclick="closeMenu()" href="/enquiry/show-enquiry" class="mobile-link"
+      >Enquiries</a
+    >
+
+    <a onclick="closeMenu()" href="/student" class="mobile-link"
+      >Enroll Student</a
+    >
+    <a onclick="closeMenu()" href="/student/show-student" class="mobile-link"
+      >Show Student</a
+    >
+
+    <a onclick="closeMenu()" href="/fee/add-fee" class="mobile-link">Add Fee</a>
+    <a onclick="closeMenu()" href="/fee/show-fee" class="mobile-link"
+      >Show Fee</a
+    >
+
+    <button class="bg-rose-300 rounded-md p-2">
+        <a onclick="closemenu()" class="mobile-link" href="/user/logout">Logout</a>
+      </button>
+    <% } %>
+  </div>
+</div>

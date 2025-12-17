@@ -1,0 +1,17 @@
+.background-theme {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -10;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #6633ee 100%);
+  background-attachment: fixed; /* stays while scrolling */
+  background-repeat: no-repeat;
+  background-size: cover;
+}

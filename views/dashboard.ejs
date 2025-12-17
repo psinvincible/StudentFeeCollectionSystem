@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>SFCS - Teacher-Dashboard</title>
+  </head>
+  <body class="min-h-screen bg-gray-50 flex flex-col">
+    <div class="shrink-0">
+      <%- include("./partials/navbar") %>
+    </div>
+    <main class="flex-grow px-4 py-6">
+
+      <h2 class="mb-6 text-lg font-semibold text-gray-800">Greetings, Welcome <span class="text-blue-600"><%= user.email %></span></h2>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-lg bg-white p-6 text-center shadow-sm border">
+            <p class="text-sm text-gray-500">Total Students</p>
+            <h3 class="mt-2 text-3xl font-bold text-gray-800"><%= stats.students %></h3>
+          </div>
+      
+            <div class="rounded-lg bg-white p-6 text-center shadow-sm border">
+            <p class="text-sm text-gray-500">Total Fees</p>
+            <h3 class="mt-2 text-3xl font-bold text-green-600">₹ <%= stats.totalFees %></h3>
+      </div>
+  </div> 
+</main>
+  
+  
+        <%- include("./partials/footer") %>
+</body>
+</html>

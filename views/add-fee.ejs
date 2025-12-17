@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title> SFCS - Add-fee</title>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <div class="shrink-0">
+      <%- include("./partials/navbar") %>
+      </div>
+      <div class="flex-grow">
+      <form action="<%= fee ? '/fee/update-fee/' + fee._id : '/fee/submit-fee'%>" method="post" class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md shadow-blue-500 ">
+        <div class="m-4">
+          <span class="">
+          <h2 class="font-bold mb-2"><%= fee ? "Fee-Edit Form" : "Fee-Submission Form" %></h2></span>
+          <div class="mb-3">
+            <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input
+              type="text"
+              class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="fullName"
+              name="fullName"
+              value="<%= fee ? fee.fullName : "" %>"
+              aria-describedby="fullName"
+              placeholder="Enter Full Name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="class" class="block text-sm font-medium text-gray-700 mb-1">Class</label>
+            <input
+              type="number"
+              class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="class"
+              name="class"
+              value="<%= fee ? fee.class : "" %>"
+              placeholder="Enter Class"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="school" class="block text-sm font-medium text-gray-700 mb-1">School</label>
+            <input
+              type="text"
+              class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="school"
+              name="school"
+              value="<%= fee ? fee.school : "" %>"
+              placeholder="Enter School Name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+            <input
+              type="number"
+              class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="amount"
+              name="amount"
+              value="<%= fee ? fee.amount : "" %>"
+              placeholder="Enter Amount"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="dop" class="block text-sm font-medium text-gray-700 mb-1">Date of Payment</label>
+            <input
+              type="date"
+              class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              id="dop"
+              name="dop"
+              value="<%= fee ? fee.dateOfPayment.toISOString().split('T')[0] : "" %>"
+              placeholder="Select DOP"
+            />
+          </div>
+          <div class="mb-3 block text-sm font-medium text-gray-700 mb-1">Payment Mode:
+            <div class="inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="paymentMode"
+                id="cash"
+                value="cash"
+                <%= fee && fee.paymentMode === "cash" ? "checked" : "" %>
+              />
+              <label class="form-check-label" for="cash">
+                Cash
+              </label>
+            </div>
+            <div class="inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="paymentMode"
+                id="online"
+                value="online"
+                <%= fee && fee.paymentMode === "online" ? "checked" : "" %>
+              />
+              <label class="form-check-label" for="online">
+                Online
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="w-full rounded-md bg-blue-600 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition"><%= fee ? "Update" : "Submit" %></button>
+        </div>
+      </form>
+      </div>
+      <div class="shrink-0">
+      <%- include("./partials/footer") %>
+      </div>
+    </div>
+  </body>
+</html>
