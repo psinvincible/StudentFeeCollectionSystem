@@ -25,10 +25,16 @@ const handleLogin = async(req, res) => {
     const { email, password } = req.body;
     try {
         const userData = await Teacher.matchPasswordAndGenerateToken(email, password);
+        // Set secure cookie options for production
+        const cookieOptions = {
+            httpOnly: true,
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            secure: process.env.NODE_ENV === "production"
+        };
         if(userData.role === "TEACHER"){
-            return res.cookie("token", userData.token).redirect("/user/dashboard");
+            return res.cookie("token", userData.token, cookieOptions).redirect("/user/dashboard");
         }else if(userData.role === "ADMIN") {
-            return res.cookie("token", userData.token).redirect("/admin");
+            return res.cookie("token", userData.token, cookieOptions).redirect("/admin");
         }        
     } catch (error) {
         res.render("login", {
