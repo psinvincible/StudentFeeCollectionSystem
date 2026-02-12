@@ -12,10 +12,10 @@ const cookieParser = require("cookie-parser");
 const { checkForAuthenticationCookie } = require("./middlewares/authentication")
 const { requireLogin } = require("./middlewares/auth")
 
-mongoose.connect("mongodb://localhost:27017/sfcs").then((e) => console.log("MongoDB Connected."));
+mongoose.connect(process.env.MONGODB_URL).then((e) => console.log("MongoDB Connected."));
 
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT;
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"))
